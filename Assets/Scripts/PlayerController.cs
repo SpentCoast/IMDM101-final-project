@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
 
+    [Header("Animator")]
+    public Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,8 +54,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // calculate movement direction
-        Vector3 movement = orientation.forward * movementVector.y +
-        orientation.right * movementVector.x;
+        Vector3 movement = orientation.forward * movementVector.y + orientation.right * movementVector.x;
+        animator.SetBool("isWalking", movementVector.x != 0 || movementVector.y != 0);
 
         // on ground
         if (grounded)
